@@ -13,6 +13,8 @@ def generate_matrices(matrix_size, data_format):
         matrix=matrix.float()
     elif(data_format=='fp16'):
         matrix=matrix.half()
+    elif(data_format=='bfloat16'):
+        matrix=matrix.bfloat16()
     elif(data_format=='int64'):
         matrix=matrix.long()
     elif(data_format=='int32'):
@@ -70,7 +72,7 @@ def cmdline_args():
     # Make parser object
     parser = argparse.ArgumentParser(description='PyTorch CUDA Matrix Multiplication Benchmark.')
     parser.add_argument("--useCUDA", type=bool, default=False, help='Use CUDA-capable GPU for Benchmark.', choices=[True, False])
-    parser.add_argument("--precision", type=str, default='fp32', help='Data Precision for Benchmark', choices=['int8', 'int16', 'int32', 'int64', 'fp16', 'fp32', 'fp64'])
+    parser.add_argument("--precision", type=str, default='fp32', help='Data Precision for Benchmark', choices=['int8', 'int16', 'int32', 'int64', 'fp16', 'bfloat16', 'fp32', 'fp64'])
     parser.add_argument("--loop", type=bool, default=False, help='Run benchmark infinite times until manually cancelled.', choices=[True, False])
     parser.add_argument("--size", type=str, default='100, 500, 1000, 2000, 4000, 8000, 16000, 32000', help='List of matrices size separated by comma, e.g., 100, 500, 1000')
     return(parser.parse_args())
